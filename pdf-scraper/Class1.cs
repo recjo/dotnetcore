@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using iTextSharp.text;
 using iTextSharp.text.pdf;
 using iTextSharp.text.pdf.parser;
-//using ClosedXML.Excel;
 
 namespace citycrime
 {
@@ -61,12 +60,6 @@ namespace citycrime
             //loop thru grid data
             for (int page = 1; page <= pdfReader.NumberOfPages; page++)
             {
-                //ITextExtractionStrategy strategy = new LocationTextExtractionStrategy();
-                //ITextExtractionStrategy strategy = new GlyphTextRenderListener();
-                //ITextExtractionStrategy strategy = new FilteredTextRenderListener();
-                //ITextExtractionStrategy strategy = new SimpleTextExtractionStrategy();
-                //ITextExtractionStrategy strategy = new MyTextrenderer();
-
                 strategy = new MyLocationTextExtractionStrategy();
                 var allPageText = PdfTextExtractor.GetTextFromPage(pdfReader, page, strategy);
                 var isContinue = FillDataSet(strategy);
@@ -271,66 +264,6 @@ namespace citycrime
                 return;
             File.WriteAllText($"{csvDirectory.TrimEnd('/')}/{filename}", data);
         }
-
-        /*private void ExportToExcel()
-        {
-            if (!Directory.Exists(csvDirectory))
-            {
-                Directory.CreateDirectory(csvDirectory);
-            }
-
-            string[] data = currentText.Split('\n');
-
-            //Creating DataTable
-            DataTable dt = new DataTable("PdfTable");
-
-            string[] headers = data[0].Split(' ');
-
-            //Adding the Columns
-            for (int j = 0; j < headers.Length; j++)
-            {
-                if (!string.IsNullOrEmpty(headers[j]))
-                {
-                    dt.Columns.Add(headers[j], typeof(string));
-                }
-
-            }
-            for (int i = 1; i < data.Length; i++)
-            {
-                string[] content = data[i].Split(' ');
-                dt.Rows.Add();
-                for (int k = 0; k < content.Length; k++)
-                {
-                    if (!string.IsNullOrEmpty(content[k]))
-                    {
-                        dt.Rows[dt.Rows.Count - 1][k] = content[k];
-                    }
-                }
-            }
-
-            using (var workbook = new XLWorkbook())
-            {
-                workbook.Worksheets.Add(dt);
-                workbook.SaveAs(@"D:\Downloads\jan-2017-rd.xlsx");
-            }
-
-            using (XLWorkbook wb = new XLWorkbook())
-            {
-                wb.Worksheets.Add(dt);
-                Response.Clear();
-                Response.Buffer = true;
-                Response.Charset = "";
-                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
-                Response.AddHeader("content-disposition", "attachment;filename=Excel.xlsx");
-                using (MemoryStream MyMemoryStream = new MemoryStream())
-                {
-                    wb.SaveAs(MyMemoryStream);
-                    MyMemoryStream.WriteTo(Response.OutputStream);
-                    Response.Flush();
-                    Response.End();
-                }
-            }
-        }*/
     }
 
     enum CrimeCodes
