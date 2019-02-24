@@ -1,3 +1,4 @@
 # PDF Scraper
 
-This DotNet Core 2.1 console app loads a pdf file containing crime statistics in a grid table. It reads the data by the text location x and y points, and builds a csv file
+This DotNet Core 2.1 console app loads a pdf file (containing a grid table of crime statistics). 
+Using the iTextSharp pdf library, it reads the "text" data by its x and y location points, and builds a csv file.
