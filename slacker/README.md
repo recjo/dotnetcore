@@ -1,2 +1,3 @@
 # slacker
-dotnet core console app takes message via command-line arguments and posts messages to slack channel
+
+DotNet Core 2.1 console app that takes a message via command-line arguments and posts it to a Slack channel.
