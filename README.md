@@ -1,2 +1,2 @@
-# dotnetcore-slacker
-dotnet core console app takes message via command-line arguments and posts messages to slack channel
+# dotnetcore
+apps and projects written in ASP.NET Core 2.1
