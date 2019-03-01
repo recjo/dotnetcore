@@ -5,4 +5,4 @@ apps and projects written in ASP.NET Core 2.1
 
 - [Slacker](/slacker) - DotNet Core 2.1 console app that takes a message via command-line arguments and posts it to a Slack channel.
 
-[SQL Server to AWS S3 Bucket](/sql2s3) - DotNet Core 2.1 console app that queries orders in SQL Server, converts each individual order to XML or JSON format, and uploads the file to an Amazon AWS S3 bucket.
+- [SQL Server to AWS S3 Bucket](/sql2s3) - DotNet Core 2.1 console app that queries orders in SQL Server, converts each individual order to XML or JSON format, and uploads the file to an Amazon AWS S3 bucket.
