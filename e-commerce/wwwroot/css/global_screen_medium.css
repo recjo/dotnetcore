@@ -1,0 +1,39 @@
+/* overrides for medum screens */
+
+    #page { max-width: 800px; }
+    #header { height: 175px; }
+    #logoBox { height: 175px; background-image: url('../images/beyondpeace_logo2_175.gif');}
+    #hdrGraphic { height: 175px; }
+    .hdr_motocross { background-image: url('../images/hdr_motocross_medium.jpg'); }
+    .hdr_skate { background-image: url('../images/hdr_skate_medium.jpg'); }
+    .hdr_snow { background-image: url('../images/hdr_snow_medium.jpg'); }
+    .hdr_surf { background-image: url('../images/hdr_surf_medium.jpg'); }
+    .hdr_default { background-image: url('../images/hdr_default_medium.jpg'); }
+    #menuBar {top:175px;}
+    .menuItem { width:13%; }
+    #smallnav {display:none;}
+    
+
+/*--------------------------------- Product Details -------------------------------*/
+
+td.prodimage
+{
+    text-align:left;
+    padding-top:0px;
+}
+
+td.prodimage img
+{
+    width:150px;
+}
+
+/************************ cart styles **********************/
+
+table.cartTable { min-width: inherit; width: inherit; }
+
+p.checkoutbutton 
+{
+	min-width:auto;
+	width:auto;
+	text-align:right;
+}

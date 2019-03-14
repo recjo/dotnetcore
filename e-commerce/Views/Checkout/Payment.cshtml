@@ -1,0 +1,186 @@
+
+@model ecom.Models.PaymentForm
+
+@{
+    ViewData["Title"] = "Payment";
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#Cart_ShipCost').change(function () {
+                var subtot = $('#sSubtot').text().replace('$', '');
+                var tax = $('#sTax').text().replace('$', '');
+                var shipcost = $(this).val();
+                var grandtot = eval(subtot) + eval(tax) + eval(shipcost);
+                $('#Cart_ShipVia').val($('#Cart_ShipCost option:selected').html());
+                $('#sShipcost').text('$' + parseFloat(shipcost).toFixed(2));
+                $('#sGrandtot').text('$' + parseFloat(grandtot).toFixed(2));
+            });
+            $('#Cart_ShipCost').change();
+        });
+    </script>
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="paybillingaddress">
+    <h3>BILLING ADDRESS</h3>
+    @(Model.BillingAddress.FirstName) @(Model.BillingAddress.LastName) <br />
+    @(Model.BillingAddress.Address1) <br />
+    @if (!String.IsNullOrEmpty(Model.BillingAddress.Address2))
+    {
+        @(Model.BillingAddress.Address2) <br />
+    }
+    @(Model.BillingAddress.City), @(Model.BillingAddress.State) @(Model.BillingAddress.PostalCode)
+    @if (!Model.BillingAddress.Country.Equals("USA"))
+    {
+    <br />@(Model.BillingAddress.Country)
+    }
+</div>
+
+<div class="payshippingaddress">
+    <h3>SHIPPING ADDRESS</h3>
+    @if (string.IsNullOrEmpty(Model.ShippingAddress.Address1))
+    {
+        <p>(same as billing)</p>
+    }
+    else
+    {
+        @(Model.ShippingAddress.FirstName) @(Model.ShippingAddress.LastName) <br />
+        @(Model.ShippingAddress.Address1) <br />
+        if (!String.IsNullOrEmpty(Model.ShippingAddress.Address2))
+        {
+            @(Model.ShippingAddress.Address2) <br />
+        }
+        @: @(Model.ShippingAddress.City), @(Model.ShippingAddress.State) @(Model.ShippingAddress.PostalCode)
+        if (!Model.ShippingAddress.Country.Equals("USA"))
+        {
+        <br />@(Model.ShippingAddress.Country)
+        }
+    }
+</div>
+
+<div style="clear:both;"></div>
+
+<form asp-controller="checkout" asp-action="payment" method="post">
+    <input type="hidden" asp-for="Cart.CartTotal" />
+    <input type="hidden" asp-for="Cart.ShipVia" />
+    <input type="hidden" asp-for="Cart.Tax" />
+
+    <table class="cartTable">
+        <tr>
+            <th colspan="2">
+                Product
+            </th>
+            <th>
+                Color
+            </th>
+            <th>
+                Size
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Qty
+            </th>
+            <th>
+                Extended
+            </th>
+        </tr>
+        @foreach (CartItem item in Model.Cart.CartItems)
+        {
+            <tr>
+                <td width="100">
+                    <environment exclude="Development">
+                        <a asp-controller="store" asp-action="details" asp-route-id="@(item.ProductId)">
+                            <img src="~/imagesprod/@(item.Sku)_thumb.jpg" width="95px" alt="@(item.ProductName)" galleryimg="no" border="0" />
+                        </a>
+                    </environment>
+                </td>
+                <td>
+                    <a asp-controller="store" asp-action="details" asp-route-id="@(item.ProductId)">
+                        @(item.ProductName)
+                    </a>
+                </td>
+                <td>
+                    @item.ColorName
+                </td>
+                <td>
+                    @item.SizeName
+                </td>
+                <td>
+                    @item.Price.ToString("c")
+                </td>
+                <td>
+                    @item.Quantity
+                </td>
+                <td>
+                    @((item.Price * item.Quantity).ToString("c"))
+                </td>
+            </tr>
+        }
+
+        <tr class="darkbordertop">
+            <td colspan="4"></td>
+            <td colspan="2">Sub-Total</td>
+            <td>
+                <span id="sSubtot">@Model.Cart.CartTotal.ToString("c")</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="2">Tax</td>
+            <td>
+                <span id="sTax">@Model.Cart.Tax.ToString("c")</span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="2" id="tdShipMenu">
+                Shipping: 
+                <select asp-for="Cart.ShipCost" asp-items="Model.ShipMenuItems"></select>
+            </td>
+            <td>
+                <span id="sShipcost"></span>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="4"></td>
+            <td colspan="2">Total</td>
+            <td>
+                <span id="sGrandtot">0</span>
+            </td>
+        </tr>
+    </table>
+
+    <fieldset>
+        <legend>Enter Credit Card Information</legend>
+
+        <div>
+            <label asp-for="Payment.CreditCardNumber"></label>
+            <input asp-for="Payment.CreditCardNumber" placeholder="numbers only" />
+            <span asp-validation-for="Payment.CreditCardNumber"></span>
+        </div>
+
+        <div>
+            <label asp-for="Payment.SecurityCode"></label>
+            <input asp-for="Payment.SecurityCode" placeholder="number only" />
+            <span asp-validation-for="Payment.SecurityCode"></span>
+        </div>
+
+        <div>
+            <label>Expiration</label>
+            <select asp-for="Payment.ExpMonth" asp-items="Model.ExpMonthMenuItems"></select> 
+            <select asp-for="Payment.ExpYear" asp-items="Model.ExpYearMenuItems"></select> 
+            <span asp-validation-for="Payment.ExpMonth"></span>
+            <span asp-validation-for="Payment.ExpYear"></span>
+        </div>
+    </fieldset>
+    
+    <p class="checkoutbutton">
+        <input type="submit" value="Submit" />
+    </p>
+</form>

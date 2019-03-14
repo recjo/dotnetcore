@@ -1,0 +1,121 @@
+/* 300 - 680    250h */
+
+    #page
+    {
+        margin: 0px auto;
+        max-width: 930px;
+        position: relative;
+    }
+    #header
+    {
+        height: 250px;
+        margin: 0px auto;
+        margin-top: 15px;
+        overflow: hidden;
+    }
+    #logoBox
+    {
+        width: 250px;
+        height: 250px;
+        background-color: #000000;
+        float: left;
+        background-position: left top;
+        background-repeat: no-repeat;
+        background-image: url('../images/beyondpeace_logo2_250.gif');
+        cursor: pointer;
+    }
+    #logoBoxDemo
+    {
+        width: 250px;
+        height: 250px;
+        background-color: gray;
+        float: left;
+    }
+    #logoBox h1
+    {
+        font-size: 18px;
+        font-weight: bold;
+        color: #EF970F;
+        margin:9px 6px 0px 0px;
+        text-align:right;
+    }
+    #hdrGraphic
+    {
+        height: 250px;
+        float: left;
+    }
+    #hdrGraphic .frontpic
+    {
+        margin-top:170px;
+    }
+    .hdr_motocross, .hdr_skate, .hdr_snow, .hdr_surf, .hdr_default
+    {
+        background-position: right top;
+        background-repeat: no-repeat;
+    }
+    .hdr_motocross { background-image: url('../images/hdr_motocross_large.jpg'); }
+    .hdr_skate { background-image: url('../images/hdr_skate_large.jpg'); }
+    .hdr_snow { background-image: url('../images/hdr_snow_large.jpg'); }
+    .hdr_surf { background-image: url('../images/hdr_surf_large.jpg'); }
+    .hdr_default { background-image: url('../images/hdr_default_large.jpg'); }
+    .hdr_none { background-color:Gray; }
+    #menuContentArea
+    {
+        background-color: #e7e7e7;
+        margin: 0px;
+        padding: 20px;
+        width: 185px;
+        vertical-align: top;
+        display:table-cell;
+    }
+    #smallnav {display:none;}
+    #mainContentArea
+    {
+        margin: 0px;
+        display:table-cell;
+        padding: 20px;
+    }
+    #menuBar
+    {
+        height: 24px; /*want 34px height max with padding*/
+        padding-top:10px;
+        text-align:center;
+        background-color: #1c1c1c;
+        background-image: url('../images/menu_tile.gif');
+        background-position: left top;
+        background-repeat: repeat-x;
+        
+	    position:absolute;
+	    top:250px;
+	    left:0; right:0;
+    }
+    .menuItem
+    {
+    	display:table-cell;
+        text-align: center;
+        background-image: url('../images/menu_sep.jpg');
+        background-position: left top;
+        background-repeat: no-repeat;
+        width:15%;
+        white-space:nowrap;
+    }
+    .menuItemDef {background-image: none; }
+    .menuItemFirst {padding-left: 0px; }
+    .menuItemLast {padding-right: 0px; }
+    .menuItem a, .menuItem a:visited
+    {
+        color: #FFFFFF;
+        text-decoration: none;
+        text-transform: uppercase;
+        font-family: Verdana, Helvetica;
+        font-weight: bold;
+        letter-spacing: -0.07em;
+        font-size: 13px;
+        margin-left:2px;
+        margin-right:2px;
+    }
+    .menuItem a:hover
+    {
+        color: #EF970F;
+    }
+    #homediv {min-height:300px;}

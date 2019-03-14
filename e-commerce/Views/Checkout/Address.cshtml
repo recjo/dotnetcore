@@ -1,0 +1,156 @@
+
+@model ecom.Models.Customer
+
+@{
+    ViewData["Title"] = "Billing and Shipping Address";
+}
+
+@if (Model == null) {
+    <h1>404 Not Found</h1>
+    return;
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#chkSameAsBilling').click(function() {
+                if ($(this).is(':checked'))
+                    $('.shipcol div').hide();
+                else
+                    $('.shipcol div').show();
+            });
+        });
+    </script>
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (@Model.isLoggedIn)
+{
+    <p>You are logged in. We have retrieved your information for you. 
+    Please make any changes below.</p>
+}
+else
+{
+    <!--<p>If you have already created an account from a previous order, 
+    <a asp-controller="account" asp-action="login" class="button">Login</a>
+    and we'll fetch your address information for 
+    you. If you don't have an account, enter your desired username and password below and 
+    we'll create one for you. </p>-->
+}
+
+<form asp-controller="checkout" asp-action="address" method="post">
+    <input type="hidden" asp-for="Uname" />
+    
+    <fieldset>
+        <legend>Customer</legend>
+        
+        <div class="enteraddress">
+            <h3>Billing Address</h3>
+            <span class="h35"></span>
+            <div>
+                <label asp-for="BillingAddress.FirstName"></label>
+                <input asp-for="BillingAddress.FirstName" />
+                <span asp-validation-for="BillingAddress.FirstName"></span>
+            </div>
+            <div>
+                <label asp-for="BillingAddress.LastName"></label>
+                <input asp-for="BillingAddress.LastName" />
+                <span asp-validation-for="BillingAddress.LastName"></span>
+            </div>
+            <div>
+                <label asp-for="BillingAddress.Address1"></label>
+                <input asp-for="BillingAddress.Address1" />
+                <span asp-validation-for="BillingAddress.Address1"></span>
+            </div>
+            <div>
+                <label asp-for="BillingAddress.Address2"></label>
+                <input asp-for="BillingAddress.Address2" />
+                <span asp-validation-for="BillingAddress.Address2"></span>
+            </div>
+            <div>
+                <label asp-for="BillingAddress.City"></label>
+                <input asp-for="BillingAddress.City" />
+                <span asp-validation-for="BillingAddress.City"></span>
+            </div>
+            <div>
+                <label asp-for="BillingAddress.State"></label>
+                <select asp-for="BillingAddress.State" asp-items="Model.StateMenuItems"></select> 
+                <span asp-validation-for="BillingAddress.State"></span>
+            </div>
+            <div>
+                <label asp-for="BillingAddress.Country"></label>
+                <select asp-for="BillingAddress.Country" asp-items="Model.CountryMenuItems"></select> 
+                <span asp-validation-for="BillingAddress.Country"></span>
+            </div>
+            <div>
+                <label asp-for="BillingAddress.PostalCode"></label>
+                <input asp-for="BillingAddress.PostalCode" />
+                <span asp-validation-for="BillingAddress.PostalCode"></span>
+            </div>
+            <div>
+                <label asp-for="Email"></label>
+                <input asp-for="Email" />
+                <span asp-validation-for="Email"></span>
+            </div>
+            <div>
+                <label asp-for="Phone"></label>
+                <input asp-for="Phone" />
+                <span asp-validation-for="Phone"></span>
+            </div>
+        </div>
+        
+        <div class="enteraddress shipcol">
+            <h3>Shipping Address</h3>
+            <span class="h35">
+                <input id="chkSameAsBilling" type="checkbox" />
+                <label for="chkSameAsBilling">Same as billing address</label>
+            </span>
+            <div>
+                <label asp-for="ShippingAddress.FirstName"></label>
+                <input asp-for="ShippingAddress.FirstName" />
+                <span asp-validation-for="ShippingAddress.FirstName"></span>
+            </div>
+            <div>
+                <label asp-for="ShippingAddress.LastName"></label>
+                <input asp-for="ShippingAddress.LastName" />
+                <span asp-validation-for="ShippingAddress.LastName"></span>
+            </div>
+            <div>
+                <label asp-for="ShippingAddress.Address1"></label>
+                <input asp-for="ShippingAddress.Address1" />
+                <span asp-validation-for="ShippingAddress.Address1"></span>
+            </div>
+            <div>
+                <label asp-for="ShippingAddress.Address2"></label>
+                <input asp-for="ShippingAddress.Address2" />
+                <span asp-validation-for="ShippingAddress.Address2"></span>
+            </div>
+            <div>
+                <label asp-for="ShippingAddress.City"></label>
+                <input asp-for="ShippingAddress.City" />
+                <span asp-validation-for="ShippingAddress.City"></span>
+            </div>
+            <div>
+                <label asp-for="ShippingAddress.State"></label>
+                <select asp-for="ShippingAddress.State" asp-items="Model.StateMenuItems"></select> 
+                <span asp-validation-for="ShippingAddress.State"></span>
+            </div>
+            <div>
+                <label asp-for="ShippingAddress.Country"></label>
+                <select asp-for="ShippingAddress.Country" asp-items="Model.CountryMenuItems"></select> 
+                <span asp-validation-for="ShippingAddress.Country"></span>
+            </div>
+            <div>
+                <label asp-for="ShippingAddress.PostalCode"></label>
+                <input asp-for="ShippingAddress.PostalCode" />
+                <span asp-validation-for="ShippingAddress.PostalCode"></span>
+            </div>
+        </div>
+    </fieldset>
+
+    <p class="checkoutbutton">
+        <input type="submit" value="Continue >>" />
+    </p>
+</form>

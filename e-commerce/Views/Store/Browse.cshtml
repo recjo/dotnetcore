@@ -1,0 +1,27 @@
+
+@model List<ecom.Models.Product>
+
+@if (Model == null || Model.Count == 0) {
+    <h1>404 Not Found</h1>
+    <p>No products found</p>
+    return;
+}
+
+<h1>@Model[0].Cat.Name</h1>
+
+<table id="prodlist" cellpadding="0", cellspacing="0">
+    @foreach (Product prod in Model)
+    {
+    <tr>
+        <td width="100">
+            <environment exclude="Development">
+                <a asp-controller="store" asp-action="details" asp-route-id="@prod.Id">
+                    <img src="~/imagesprod/@(prod.Sku)_thumb.jpg" width="95px" alt="@(prod.Sku)" galleryimg="no" border="0" />
+                </a>
+            </environment>
+        </td>
+        <td width="300"><a asp-controller="store" asp-action="details" asp-route-id="@prod.Id">@(prod.Name)</a></td>
+        <td width="100"><a asp-controller="store" asp-action="details" asp-route-id="@prod.Id">@(@prod.Price.ToString("c"))</a></td>
+    </tr>
+    }
+</table>

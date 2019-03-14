@@ -1,0 +1,7 @@
+
+@model List<ecom.Models.Category>
+
+@foreach (Category cat in Model)
+{
+    <a asp-controller="store" asp-action="browse" asp-route-id="@cat.Id" class="navhover">@(cat.Name)</a><br />
+}

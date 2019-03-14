@@ -1,0 +1,11 @@
+﻿@model ecom.Models.PageContent
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div id="homediv">
+@Html.Raw(Model.PageText)
+</div>

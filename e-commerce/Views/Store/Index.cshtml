@@ -1,0 +1,17 @@
+
+@model List<ecom.Models.Category>
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<h1>Shop</h1>
+
+<div id="ulList">
+    <ul>
+        @foreach (Category cat in Model)
+        {
+            <li><a asp-controller="store" asp-action="browse" asp-route-id="@cat.Id">@(cat.Name)</a></li>
+        }
+    </ul>
+</div>

@@ -1,0 +1,364 @@
+/*padding is inside the div and margin is outside the div*/
+/*padding on both side adds twice to width of div*/
+/*classes can be used many times on page. div IDs only once*/
+/* ASP.NET CssClass looks for .stylename */
+body 
+{
+	margin: 0px;
+	padding: 0px;
+	height: 100%;
+	font-family: Helvetica, Arial, sans-serif;
+	font-size: 11px;
+	color: #000000;
+	background-color: #FFFFFF;
+}
+	
+#page {
+	width: 900px;
+	padding: 0px;
+	margin:  0px auto;
+	text-align: left;
+	background-color: #FFFFFF;
+	/*border: thin solid green;*/
+}
+
+#header
+{
+	height: 90px;
+	background-color: #A40000;
+	padding: 15px;
+	text-align: left;
+	overflow: hidden;
+	background-image: url(../nimda/pics/nimda_header.jpg);
+	/*border: thin solid blue;*/
+}
+
+#header h1
+{
+	color: #FFFFFF;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+#navigation
+{
+	float: left;
+	width: 200px;
+	height: 100%;
+	padding: 10px;
+	margin: 0px auto;
+	text-align: left;
+	background-color: #FFFFFF;
+}
+
+#content
+{
+	float: left;
+	width: 640px;
+	min-height: 300px;         /* these three */
+	height: auto !important;   /* lines work */
+	height: 300px;             /* together */
+	padding: 10px;
+	margin:  0px 0px 0px 0px;
+	text-align: left;
+	background-color: #FFFFFF;
+	/*border: thin solid red;*/
+	border-left: solid thin #c7c7c7;
+}
+
+#footer
+{
+	color: Gray;
+	font-size: 9px;
+	text-align: right;
+	padding: 5px;
+	border-top: solid thin #c7c7c7;
+}
+
+.brclear
+{
+     clear: both; 
+     height: 0px; 
+     margin: 0px;
+     font-size: 1px;
+     line-height: 0px;
+}
+
+input[type=submit]
+{
+	clear: both;
+	display: inline-block;
+	margin-top: 10px; 
+	padding: 5px;
+	border: none;
+	background-color: #5e5b54;
+	color: #fff !important;
+	font-weight: bold !important;
+	font-size: 12px !important;
+	font-family: Helvetica,Arial,sans-serif !important;
+	cursor: pointer;
+}
+
+a.button, a.button:visited
+{
+    display: inline-block;
+	color: #fff !important;
+	text-decoration: none;
+	margin-top: 10px; 
+	padding: 5px;
+	border: none;
+	background-color: #5e5b54;
+	font-weight: bold !important;
+	font-size: 12px !important;
+	font-family: Helvetica,Arial,sans-serif !important;
+}
+
+.text-box, .textarea, .txtNumber
+{
+    padding: 2px;
+    background-color: #ffffff;
+    color: #000000;
+    width: 500px;
+    font-size: 11px;
+}
+
+.textarea
+{
+    width: 500px;
+    height: 100px;
+}
+
+.txtNumber
+{
+    width: 40px;
+}
+    
+.field-validation-error span { color: #ff3366; }
+
+/*------------------------------   T o p    N a v i g a t i o n    -------------------------------------*/
+
+#menuPanel {
+    font-size: 11px;
+    font-weight: normal;
+    margin-top: 25px;
+}
+
+#menuPanel a , #menuPanel a:visited {
+    color: #FFFFFF;
+    text-decoration: underline;
+    display: inline-block;
+    height: 15px;
+}
+
+#menuPanel a:hover {
+    color: #9C3B35;
+    text-decoration: none;
+}
+
+#menuPanel text {
+    color: #A17B2F;
+    font-weight: bold;
+}
+
+#menuPanel ul, #menuPanel li {
+    float: right;
+    display: inline;
+    margin: 0px 0px 0px 10px;
+}
+
+
+/*------------------------- H T M L  T a g s ------------------------------------*/
+h1
+{
+	color: #A40000;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+h2
+{
+	color: #A40000;
+	font-size: 16px;
+	font-weight: bold;
+}
+
+h3
+{
+	color: #666666;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+h4
+{
+	color: #A40000;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+hr
+{
+	border: solid 2px #A40000;
+}
+
+a 
+{
+	color: #A40000;
+	text-decoration: underline;
+}
+
+a:visited
+{
+	color: #A40000;
+	text-decoration: underline;	
+}
+
+a:hover
+{
+	color: #000000;
+	text-decoration: none;	
+}
+
+#BtnOverride .SubmitButton,
+#BtnOverride2 .SubmitButton,
+#BtnOverride3 .SubmitButton
+{
+	/* Putting the SubmitButton class inside a div with
+	an ID of BtnOverride (not class=), overrides all parent styles */
+	width: 91px;
+	height: 16px;
+	color: #ffffff;
+	cursor: pointer;
+	text-transform: none;
+	letter-spacing: 1px;
+    font-family: 'Myriad Pro', Arial;
+    font-variant: normal;
+    font-size: 10px;
+    background: url("../pics/doubleButtonBlank.gif") 0px 0px repeat-x;
+    border: none;
+}
+
+#BtnOverride .SubmitButton:hover,
+#BtnOverride2 .SubmitButton:hover,
+#BtnOverride3 .SubmitButton:hover {
+    background: url("../pics/doubleButtonBlank.gif") 0px -16px repeat-x;
+    border: none;
+}
+
+
+/*------------------------- H o v e r  M e n u s ------------------------------------*/
+a.navhover:link, a.navhover:visited, a.navhover:active
+{
+	width: 100%;
+	display: block;
+	color: #A40000;
+	border-bottom-width: 1px;
+	border-bottom-color: #E3E3E3;
+	border-bottom-style: solid;
+	padding-top: 3px;
+	padding-left: 5px;
+	padding-bottom: 3px;
+	text-decoration: none;
+}
+
+a.navhover:hover
+{
+	color: #000000;
+	background-color: #E2E2E2;
+	text-decoration: none;
+}
+
+.LoginBox
+{
+    border-color: #43536F;
+    background-color: #EFECE5;
+	border-style: double;
+}
+
+.LoginBar
+{
+    background-color: #43536F;
+    color: #FFFFFF;
+	font-weight: bold;
+}
+
+.LoginLabels
+{
+	/*text username/password*/
+    color: #000000;
+}
+
+.LoginTextBox
+{
+	/*textbox for username/password*/
+	width: 180px;
+	border: solid 1px #43536F;
+}
+
+.LoginCheckbox
+{
+	/*Remember me checkbox*/
+	color: Gray;
+	text-align: center;
+}
+
+th 
+{
+    text-align: left;
+}
+
+td
+{
+    padding: 5px 0px;
+    border-bottom: solid 1px #666666;
+}
+
+.editor-label 
+{
+    margin: 10px 0px;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.sg
+{
+    font-size: 9px;
+    color: #999999;
+}
+
+legend 
+{
+    font-size: 13px;
+    font-weight: bold;
+    color: #A40000;
+}
+
+.header th
+{
+    background-color: #000000;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 3px;
+}
+
+.b6453 a, .b6453:visited, .b6453 a:hover 
+{
+    color: #666666;
+}
+
+.namered
+{
+	color: #A40000 !important;
+}
+
+#editaddress 
+{
+    width: 295px;
+    float: left;
+}
+
+#editaddress .text-box, #editaddress .textarea
+{
+    width: 285px;
+}

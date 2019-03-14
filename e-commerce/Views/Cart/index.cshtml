@@ -1,0 +1,136 @@
+
+@model ecom.Models.Cart
+
+@{
+    ViewData["Title"] = "Shopping Cart";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (Model.CartItems.Any())
+{
+<div id="update-message"></div>
+<table class="cartTable">
+    <tr>
+        <th colspan="2">
+            Product
+        </th>
+        <th>
+            Color
+        </th>
+        <th>
+            Size
+        </th>
+        <th>
+            Price
+        </th>
+        <th>
+            Qty
+        </th>
+        <th>
+            Extended
+        </th>
+        <th></th>
+    </tr>
+    @foreach (CartItem item in Model.CartItems)
+    {
+        <tr>
+            <td width="100">
+                <environment exclude="Development">
+                    <a asp-controller="store" asp-action="details" asp-route-id="@(item.ProductId)">
+                        <img src="~/imagesprod/@(item.Sku)_thumb.jpg" width="95px" alt="@(item.ProductName)" galleryimg="no" border="0" />
+                    </a>
+                </environment>
+            </td>
+            <td>
+                <a asp-controller="store" asp-action="details" asp-route-id="@(item.ProductId)">
+                    @(item.ProductName)
+                </a>
+            </td>
+            <td>
+                @item.ColorName
+            </td>
+            <td>
+                @item.SizeName
+            </td>
+            <td>
+                @item.Price.ToString("c")
+            </td>
+            <td>
+                <form asp-controller="cart" asp-action="update">
+                    <input id="Id" name="Id" type="hidden" value="@item.Id" />
+                    <input id="Qty" name="Qty" class="form-control txtNumber" maxlength="2" value="@item.Quantity" data-val="true" data-val-required="Qty is required." />
+                    <input type="submit" value="update" />
+                </form>
+            </td>
+            <td>
+                @((item.Price * item.Quantity).ToString("c"))
+            </td>
+            <td>
+                <a asp-controller="cart" asp-action="delete" asp-route-id="@(item.Id)">
+                    <img src="/images/delete.gif" width="11" height="12" galleryimg="no" alt="delete this item" border="0" />
+                </a>
+            </td>
+        </tr>
+    }
+    <tr>
+        <td>
+            Total
+        </td>
+        <td colspan="5"></td>
+        <td>
+            @Model.CartTotal.ToString("c")
+        </td>
+        <td></td>
+    </tr>
+</table>
+
+<p class="checkoutbutton">
+    <a asp-controller="checkout" asp-action="address" class="button">Checkout >></a>
+</p>
+    
+<h3>Shippping Chart</h3>
+    
+<table cellpadding="0" cellspacing="0" class="cartTable">
+<tr>
+    <th>
+        Number of Items
+    </th>
+    <th>
+        Charge
+    </th>
+</tr>
+
+    @foreach (var item in Model.ShipChart)
+    {
+    <tr>
+        <td>
+            @item.QtyStart 
+            @if (item.QtyEnd.ToString().Contains("99999"))
+            {
+                @:and up                                         
+            }
+            else
+            {
+                @:- @item.QtyEnd
+            }
+
+        </td>
+        <td>
+            @item.Charge.ToString("c")
+        </td>
+    </tr>
+    }
+
+</table>
+
+}
+else
+{
+    <p class="EmptyMsg">
+        Your cart is empty.
+    </p>
+    <p>
+        <a asp-controller="store" asp-action="index">Shop now</a>
+    </p>
+}

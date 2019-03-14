@@ -1,0 +1,26 @@
+
+@model IEnumerable<ecom.Models.Faqs>
+
+@{
+    ViewData["Title"] = "Frequently Asked Questions";
+}
+
+@section Scripts
+{
+    <script type="text/javascript">
+        function showans(id) {
+            $('#' + id).toggle();
+        }
+    </script>
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@foreach (Faqs faq in Model) {
+    <div>
+        <div class="faq-question" onclick="showans('tr@(faq.Id)');"><span class="qstyle">Q. </span>@Html.DisplayFor(modelItem => faq.Question)</div>
+    </div>
+    <div id="tr@(faq.Id)" style="display:none;">
+        <div class="faq-answer">@Html.Raw(faq.Answer)</div>
+    </div>
+}

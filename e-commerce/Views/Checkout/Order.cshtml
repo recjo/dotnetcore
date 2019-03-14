@@ -1,0 +1,181 @@
+
+@model ecom.Models.Order
+
+@{
+    ViewData["Title"] = "Order Details";
+}
+
+@if (Model == null) {
+    <h1>404 Not Found</h1>
+    return;
+}
+
+<h1>Order Success</h1>
+
+<p>Thanks for your order! Your order number is: @Model.OrderNumber</p>
+
+<b>Order No:</b> @Model.OrderNumber<br />
+<b>Order Date:</b> @Model.OrderDate<br />
+<b>Order Status:</b> @Model.OrderStatus<br />
+<b>Paid By:</b> @Model.PaymentType @Model.Last4<br />
+@if (Model.PaymentDate != null)
+{
+    <b>Payment Date:</b> @Model.PaymentDate<br /><br />
+}
+
+<table>
+    <tr>
+    <td valign="top" width="300">
+        <b>Billing Address:</b><br />
+        @Model.BillingFirstName @Model.BillingLastName<br />
+        @Model.BillingAddress1<br />
+        @if (!String.IsNullOrEmpty(Model.BillingAddress2))
+        {
+            @Model.BillingAddress2<br />
+        }
+        @Model.BillingCity
+        @Model.BillingState
+        @Model.BillingPostalCode<br />
+        @if (!String.IsNullOrEmpty(Model.BillingCountry) && Model.BillingCountry.ToLower() != "us" && Model.BillingCountry.ToLower() != "u.s." && Model.BillingCountry.ToLower() != "usa" && Model.BillingCountry.ToLower() != "united states")
+        {
+            @Model.BillingCountry<br />
+        }
+        Phone: @Model.Phone<br />
+        Email:@Model.Email<br />
+    </td>
+    <td valign="top">
+        <b>Shipping Address:</b><br />
+        @if (!String.IsNullOrEmpty(Model.ShippingAddress1))
+        {
+            <text>
+            @Model.ShippingFirstName @Model.ShippingLastName<br />
+            @Model.ShippingAddress1<br />
+            @if (!String.IsNullOrEmpty(Model.ShippingAddress2))
+            {
+                @Model.ShippingAddress2<br />
+            }
+            @Model.ShippingCity
+            @Model.ShippingState
+            @Model.ShippingPostalCode<br />
+            @if (!String.IsNullOrEmpty(Model.ShippingCountry) && Model.ShippingCountry.ToLower() != "us" && Model.ShippingCountry.ToLower() != "u.s." && Model.ShippingCountry.ToLower() != "usa" && Model.ShippingCountry.ToLower() != "united states")
+            {
+                @Model.ShippingCountry<br />
+            }
+            </text>
+        }
+        else
+        {
+            <text>
+            @Model.BillingFirstName @Model.BillingLastName<br />
+            @Model.BillingAddress1<br />
+            @if (!String.IsNullOrEmpty(Model.BillingAddress2))
+            {
+                @Model.BillingAddress2<br />
+            }
+            @Model.BillingCity
+            @Model.BillingState
+            @Model.BillingPostalCode<br />
+            @if (!String.IsNullOrEmpty(Model.BillingCountry) && Model.BillingCountry.ToLower() != "us" && Model.BillingCountry.ToLower() != "u.s." && Model.BillingCountry.ToLower() != "usa" && Model.BillingCountry.ToLower() != "united states")
+            {
+                @Model.BillingCountry<br />
+            }
+            </text>
+        }
+    </td>
+    </tr>
+</table>
+
+<hr />
+                
+<br />
+
+<table class="cartTable" border="0">
+    <th colspan="2">
+        Product
+    </th>
+    <th>
+        Color
+    </th>
+    <th>
+        Size
+    </th>
+    <th>
+        Price
+    </th>
+    <th>
+        Quantity
+    </th>
+    <th>
+        Extended
+    </th>
+</tr>
+@foreach (var item in Model.OrderItems)
+{
+    <tr>
+        <td width="100">
+        <environment exclude="Development">
+            <a asp-controller="store" asp-action="details" asp-route-id="@(item.ProductId)">
+                <img src="~/imagesprod/@(item.Sku)_thumb.jpg" width="95px" alt="@(item.ProductName)" galleryimg="no" border="0" />
+            </a>
+        </environment>
+        </td>
+        <td>
+            @item.ProductName
+        </td>
+        <td>
+            @item.ColorName
+        </td>
+        <td>
+            @item.SizeName
+        </td>
+        <td>
+            @item.Price.ToString("c")
+        </td>
+        <td>
+            @item.Quantity
+        </td>
+        <td>
+            @((item.Price * item.Quantity).ToString("c"))
+        </td>
+    </tr>
+}
+    <tr class="darkbordertop">
+        <td colspan="5"></td>
+        <td colspan="1">Sub-Total</td>
+        <td>
+            @Model.SubTotal.ToString("c")
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5"></td>
+        <td colspan="1">Tax</td>
+        <td>
+            @Model.Tax.ToString("c")
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5"></td>
+        <td colspan="1">@Model.ShipVia Shipping</td>
+        <td>
+            @Model.Shipping.ToString("c")
+        </td>
+    </tr>
+    <tr>
+        <td colspan="5"></td>
+        <td colspan="1">Total</td>
+        <td>
+            @Model.Total.ToString("c")
+        </td>
+    </tr>
+</table>
+
+
+<h3>Thank you for your order!</h3>
+
+
+
+
+
+
+
+
